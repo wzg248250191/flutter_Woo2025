@@ -71,11 +71,11 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
           resizeToAvoidBottomInset: false,
           // 导航
           appBar: mainAppBarWidget(titleString: LocaleKeys.gDetailTitle.tr),
-           // 内容
+          // 内容
           body: SafeArea(
             child: <Widget>[
               // 主视图
-             SmartRefresher(
+              SmartRefresher(
                 controller: controller.mainRefreshController, // 刷新控制器
                 onRefresh: controller.onMainRefresh, // 下拉刷新回调
                 child: _buildView(context),
@@ -209,27 +209,22 @@ class _ProductDetailsViewGetX extends GetView<ProductDetailsController> {
     );
   }
 
-    // 底部按钮
+  // 底部按钮
   Widget _buildButtons(BuildContext context) {
     return <Widget>[
-      // 加入购物车
-      ButtonWidget.outline(
-        LocaleKeys.gDetailBtnAddCart.tr,
-      ).expanded(),
+          // 加入购物车
+          ButtonWidget.outline(LocaleKeys.gDetailBtnAddCart.tr).expanded(),
 
-      // 间距
-      SizedBox(width: AppSpace.iconTextLarge),
+          // 间距
+          SizedBox(width: AppSpace.iconTextLarge),
 
-      // 立刻购买
-      ButtonWidget.primary(
-        LocaleKeys.gDetailBtnBuy.tr,
-      ).expanded(),
-    ]
+          // 立刻购买
+          ButtonWidget.primary(LocaleKeys.gDetailBtnBuy.tr).expanded(),
+        ]
         .toRow(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
         )
         .paddingHorizontal(AppSpace.page);
   }
-
 }

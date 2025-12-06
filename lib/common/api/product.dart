@@ -46,7 +46,7 @@ class ProductApi {
     return attributes;
   }
 
-    /// 评论列表
+  /// 评论列表
   static Future<List<ReviewModel>> reviews(ReviewsReq? req) async {
     var res = await WPHttpService.to.get(
       '/products/reviews',
@@ -58,6 +58,20 @@ class ProductApi {
       reviews.add(ReviewModel.fromJson(item));
     }
     return reviews;
+  }
+
+    /// tags 列表
+  static Future<List<TagsModel>> tags(TagsReq? req) async {
+    var res = await WPHttpService.to.get(
+      '/products/tags',
+      params: req?.toJson(),
+    );
+
+    List<TagsModel> tags = [];
+    for (var item in res.data) {
+      tags.add(TagsModel.fromJson(item));
+    }
+    return tags;
   }
 
 }

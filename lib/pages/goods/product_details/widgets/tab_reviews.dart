@@ -15,7 +15,7 @@ class TabReviewsView extends GetView<ProductDetailsController> {
   @override
   String? get tag => uniqueTag;
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<ProductDetailsController>(
       tag: tag,
@@ -48,7 +48,7 @@ class TabReviewsView extends GetView<ProductDetailsController> {
     );
   }
 
-     // 评论图
+  // 评论图
   Widget _buildReviewImages() {
     return <Widget>[
       // 图
@@ -58,12 +58,8 @@ class TabReviewsView extends GetView<ProductDetailsController> {
           width: 45.w,
           height: 45.w,
         ).onTap(() => controller.onReviewsGalleryTap(i)),
-    ].toWrap(
-      spacing: AppSpace.listItem,
-      runSpacing: AppSpace.listRow,
-    );
+    ].toWrap(spacing: AppSpace.listItem, runSpacing: AppSpace.listRow);
   }
-
 
   // 列表项
   _buildListItem(ReviewModel item) {
@@ -79,11 +75,8 @@ class TabReviewsView extends GetView<ProductDetailsController> {
       // 星、名称、评论、图
       <Widget>[
         // 5 星
-       StarsListWidget(
-          value: item.rating ?? 0,
-          size: 12,
-        ),
-        
+        StarsListWidget(value: item.rating ?? 0, size: 12),
+
         // 名称、时间
         <Widget>[
           // 名称
@@ -92,25 +85,14 @@ class TabReviewsView extends GetView<ProductDetailsController> {
             weight: FontWeight.w500,
           ).expanded(),
           // 时间
-          TextWidget.label(
-            item.dateCreated ?? "",
-          ),
+          TextWidget.label(item.dateCreated ?? ""),
         ].toRow(),
 
         // 评论
-        TextWidget.label(
-          item.review?.clearHtml ?? "",
-        ),
+        TextWidget.label(item.review?.clearHtml ?? ""),
         // 图
         _buildReviewImages(),
-      ]
-          .toColumn(
-            crossAxisAlignment: CrossAxisAlignment.start,
-          )
-          .expanded(),
-    ].toRow(
-      crossAxisAlignment: CrossAxisAlignment.start,
-    );
+      ].toColumn(crossAxisAlignment: CrossAxisAlignment.start).expanded(),
+    ].toRow(crossAxisAlignment: CrossAxisAlignment.start);
   }
-
 }

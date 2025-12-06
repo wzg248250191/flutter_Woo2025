@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_final_fields
 
 import 'dart:convert';
 
@@ -37,20 +37,20 @@ class ProductDetailsController extends GetxController
   // 选中尺寸列表
   List<String> sizeKeys = [];
 
-    // 评论 刷新控制器
+  // 评论 刷新控制器
   final RefreshController reviewsRefreshController = RefreshController(
     initialRefresh: true,
   );
 
   // reviews 评论列表
   List<ReviewModel> reviews = [];
-  
+
   // 评论图片列表 测试用
   List<String> reviewImages = [];
-  
+
   // 评论 页码
   int _reviewsPage = 1;
-  
+
   // 评论 页尺寸
   int _reviewsLimit = 20;
 
@@ -59,9 +59,7 @@ class ProductDetailsController extends GetxController
     initialRefresh: true,
   );
 
-
   _initData() async {
-
     //await _loadProduct();
 
     // 初始化 tab 控制器
@@ -106,11 +104,9 @@ class ProductDetailsController extends GetxController
         sizeKeys = sizeAttr?.first.options ?? [];
       }
     }
-    	// 评论
+    // 评论
     try {
-      reviews = await ProductApi.reviews(ReviewsReq(
-        product: productId,
-      ));
+      reviews = await ProductApi.reviews(ReviewsReq(product: productId));
     } catch (e) {
       reviews = [];
     }
@@ -188,18 +184,20 @@ class ProductDetailsController extends GetxController
     update(["product_sizes"]);
   }
 
-    // 评论 拉取数据
+  // 评论 拉取数据
   Future<bool> _loadReviews(bool isRefresh) async {
     // 拉取数据
     // 评论
-    var reviewsListTmp = await ProductApi.reviews(ReviewsReq(
-      // 刷新, 重置页数1
-      page: isRefresh ? 1 : _reviewsPage,
-      // 每页条数
-      prePage: _reviewsLimit,
-      // 商品id
-      product: productId,
-    ));
+    var reviewsListTmp = await ProductApi.reviews(
+      ReviewsReq(
+        // 刷新, 重置页数1
+        page: isRefresh ? 1 : _reviewsPage,
+        // 每页条数
+        prePage: _reviewsLimit,
+        // 商品id
+        product: productId,
+      ),
+    );
 
     // 更新数据
     if (isRefresh) {
@@ -214,6 +212,7 @@ class ProductDetailsController extends GetxController
 
     return reviewsListTmp.isEmpty;
   }
+
   // 评论 下拉刷新
   void onReviewsRefresh() async {
     try {
@@ -228,6 +227,7 @@ class ProductDetailsController extends GetxController
     }
     update(["product_reviews"]);
   }
+
   // 评论 上拉载入新商品
   void onReviewsLoading() async {
     if (reviews.isNotEmpty) {
@@ -252,13 +252,12 @@ class ProductDetailsController extends GetxController
     }
     update(["product_reviews"]);
   }
+
   // 评论图片浏览
   void onReviewsGalleryTap(int index) {
-    Get.to(GalleryWidget(
-      initialIndex: index,
-      items: reviewImages,
-    ));
+    Get.to(GalleryWidget(initialIndex: index, items: reviewImages));
   }
+
   // main 下拉刷新
   void onMainRefresh() async {
     try {
@@ -272,7 +271,6 @@ class ProductDetailsController extends GetxController
     }
     update(["product_details"]);
   }
-
 
   void onTap() {}
 
@@ -290,13 +288,13 @@ class ProductDetailsController extends GetxController
   @override
   void onClose() {
     super.onClose();
-     // 销毁 tab 控制器
+    // 销毁 tab 控制器
     tabController.dispose();
 
     // 销毁 主下拉控制器
     mainRefreshController.dispose();
-    
-      // 释放 评论下拉控制器
+
+    // 释放 评论下拉控制器
     reviewsRefreshController.dispose();
   }
 }

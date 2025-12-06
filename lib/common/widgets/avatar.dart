@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 
 /// 头像类型
-enum AvatarWidgetType {
-  img,
-  svg,
-  text,
-}
+enum AvatarWidgetType { img, svg, text }
 
 /// 头像组件
 class AvatarWidget extends StatelessWidget {
@@ -101,10 +97,7 @@ class AvatarWidget extends StatelessWidget {
                 height: imgSize,
                 radius: imgSize / 2,
               )
-            : IconWidget.img(
-                path!,
-                size: imgSize,
-              );
+            : IconWidget.img(path!, size: imgSize);
         break;
       case AvatarWidgetType.svg:
         child = isHttp == true
@@ -114,15 +107,12 @@ class AvatarWidget extends StatelessWidget {
                 height: imgSize,
                 radius: imgSize / 2,
               )
-            : IconWidget.svg(
-                path!,
-                size: imgSize,
-              );
+            : IconWidget.svg(path!, size: imgSize);
         break;
       case AvatarWidgetType.text:
-        child = TextWidget.body(firstChar?.substring(0, 1).toUpperCase() ?? '?')
-            .center()
-            .tightSize(imgSize);
+        child = TextWidget.body(
+          firstChar?.substring(0, 1).toUpperCase() ?? '?',
+        ).center().tightSize(imgSize);
         break;
     }
 
