@@ -1,0 +1,2 @@
+ddartdoc:
+  nodoc: ["lib/pages/**/*.dart"]

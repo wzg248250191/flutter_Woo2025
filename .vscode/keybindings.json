@@ -1,0 +1,20 @@
+[
+  {
+    "key": "space",
+    "command": "acceptSelectedSuggestion",
+    "when": "suggestWidgetVisible && editorTextFocus"
+  },
+  {
+    "key": "space",
+    "command": "editor.action.inlineSuggest.commit",
+    "when": "inlineSuggestionVisible && editorTextFocus"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-workbench.action.terminal.runSelectedText"
+  },
+  {
+    "key": "ctrl+shift+enter",
+    "command": "-workbench.action.terminal.runActiveFile"
+  }
+]
